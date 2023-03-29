@@ -70,7 +70,6 @@ class ChartingState extends MusicBeatState {
 
 	var curSelectedNote:Array<Dynamic>;
 
-	var tempBpm:Float = 0;
 	var gridBlackLine:FlxSprite;
 	var vocals:FlxSound;
 	var P1vocals:FlxSound;
@@ -104,8 +103,7 @@ class ChartingState extends MusicBeatState {
 				gfVersion: 'gf',
 				noteStyle: 'normal',
 				stage: 'stage',
-				speed: 1,
-				validScore: false
+				speed: 1
 			};
 		}
 
@@ -130,8 +128,6 @@ class ChartingState extends MusicBeatState {
 
 		FlxG.mouse.visible = true;
 		FlxG.save.bind('funkin', 'ninjamuffin99');
-
-		tempBpm = _song.bpm;
 
 		addSection();
 
@@ -530,7 +526,7 @@ class ChartingState extends MusicBeatState {
 			} else if (wname == 'song_bpm') {
 				if (nums.value <= 0)
 					nums.value = 1;
-				tempBpm = Std.int(nums.value);
+				_song.bpm = Std.int(nums.value);
 				Conductor.mapBPMChanges(_song);
 				Conductor.changeBPM(Std.int(nums.value));
 			} else if (wname == 'note_susLength') {
@@ -853,8 +849,6 @@ class ChartingState extends MusicBeatState {
 				}
 			}
 		}
-
-		_song.bpm = tempBpm;
 
 		bpmTxt.text = bpmTxt.text = Std.string(FlxMath.roundDecimal(Conductor.songPosition / 1000, 2))
 			+ " / "

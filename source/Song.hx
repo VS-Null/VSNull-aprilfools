@@ -19,7 +19,6 @@ typedef SwagSong = {
 	var gfVersion:String;
 	var noteStyle:String;
 	var stage:String;
-	var validScore:Bool;
 }
 
 class Song {
@@ -44,12 +43,6 @@ class Song {
 	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong {
 		trace(jsonInput);
 		var folderLowercase = StringTools.replace(folder, " ", "-").toLowerCase();
-		switch (folderLowercase) {
-			case 'dad-battle':
-				folderLowercase = 'dadbattle';
-			case 'philly-nice':
-				folderLowercase = 'philly';
-		}
 
 		trace('loading ' + folderLowercase + '/' + jsonInput.toLowerCase());
 
@@ -61,9 +54,7 @@ class Song {
 		return parseJSONshit(rawJson);
 	}
 
-	public static function parseJSONshit(rawJson:String):SwagSong {
-		var swagShit:SwagSong = cast Json.parse(rawJson).song;
-		swagShit.validScore = true;
-		return swagShit;
+	inline public static function parseJSONshit(rawJson:String):SwagSong {
+		return cast Json.parse(rawJson).song;
 	}
 }

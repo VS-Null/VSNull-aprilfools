@@ -100,16 +100,17 @@ class PauseSubState extends MusicBeatSubstate {
 				case "Restart Song":
 					FlxG.resetState();
 				case "Exit to menu":
-					if (FlxG.save.data.fpsCap > 290)
-						(cast(Lib.current.getChildAt(0), Main)).setFPSCap(290);
-					FlxG.switchState(new MainMenuState());
+					#if sys
+					Sys.exit(0);
+					#else
+					openfl.system.System.exit(0);
+					#end
 			}
 		}
 	}
 
 	override function destroy() {
 		pauseMusic.destroy();
-
 		super.destroy();
 	}
 

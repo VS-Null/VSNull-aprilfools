@@ -55,19 +55,19 @@ class Character extends FlxSprite {
 				playAnim('danceRight');
 
 				barColor = 0xFFA2044B;
-			case 'dad':
-				frames = Paths.getSparrowAtlas('characters/DADDY_DEAREST', 'shared');
-				animation.addByPrefix('idle', 'Dad idle dance', 24);
-				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+			case 'null':
+				frames = Paths.getSparrowAtlas('characters/Null', 'shared');
+				animation.addByPrefix('idle', 'Null Idle', 24);
+				animation.addByPrefix('singUP', 'Null Up', 24);
+				animation.addByPrefix('singRIGHT', 'Null Right', 24);
+				animation.addByPrefix('singDOWN', 'Null Down', 24);
+				animation.addByPrefix('singLEFT', 'Null Left', 24);
 
-				addOffset('idle');
-				addOffset("singUP", -6, 50);
-				addOffset("singRIGHT", 0, 27);
-				addOffset("singLEFT", -10, 10);
-				addOffset("singDOWN", 0, -30);
+				addOffset('idle', 0, 80);
+				addOffset("singUP", -6, 80);
+				addOffset("singRIGHT", 0, 80);
+				addOffset("singLEFT", -10, 80);
+				addOffset("singDOWN", 0, 80);
 
 				playAnim('idle');
 

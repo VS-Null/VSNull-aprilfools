@@ -24,8 +24,6 @@ class Main extends Sprite {
 
 	var fpsCounter:Overlay;
 
-	var game:FlxGame;
-
 	public static function main():Void {
 		Lib.current.addChild(new Main());
 	}
@@ -33,22 +31,6 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
-		if (stage != null) {
-			init();
-		} else {
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
-	}
-
-	private function init(?E:Event):Void {
-		if (hasEventListener(Event.ADDED_TO_STAGE)) {
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-		}
-
-		setupGame();
-	}
-
-	private function setupGame():Void {
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -60,13 +42,7 @@ class Main extends Sprite {
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		#if !debug
-		initialState = TitleState;
-		#end
-
-		game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
-
-		addChild(game);
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
 		fpsCounter = new Overlay(10, 3, gameWidth, gameHeight);
 		addChild(fpsCounter);
@@ -74,19 +50,19 @@ class Main extends Sprite {
 			fpsCounter.visible = FlxG.save.data.fps;
 	}
 
-	public function toggleFPS(fpsEnabled:Bool):Void {
+	inline public function toggleFPS(fpsEnabled:Bool):Void {
 		fpsCounter.visible = fpsEnabled;
 	}
 
-	public function setFPSCap(cap:Float) {
+	inline public function setFPSCap(cap:Float) {
 		openfl.Lib.current.stage.frameRate = cap;
 	}
 
-	public function getFPSCap():Float {
+	inline public function getFPSCap():Float {
 		return openfl.Lib.current.stage.frameRate;
 	}
 
-	public function getFPS():Float {
+	inline public function getFPS():Float {
 		return fpsCounter.currentFrames;
 	}
 }

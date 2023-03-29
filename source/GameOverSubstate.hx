@@ -29,7 +29,6 @@ class GameOverSubstate extends MusicBeatSubstate {
 		add(camFollow);
 
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix, 'shared'));
-		Conductor.changeBPM(100);
 
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
@@ -45,12 +44,11 @@ class GameOverSubstate extends MusicBeatSubstate {
 		}
 
 		if (controls.BACK) {
-			FlxG.sound.music.stop();
-
-			if (PlayState.isStoryMode)
-				FlxG.switchState(new StoryMenuState());
-			else
-				FlxG.switchState(new FreeplayState());
+			#if sys
+			Sys.exit(0);
+			#else
+			openfl.system.System.exit(0);
+			#end
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12) {
@@ -64,12 +62,6 @@ class GameOverSubstate extends MusicBeatSubstate {
 		if (FlxG.sound.music.playing) {
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
-	}
-
-	override function beatHit() {
-		super.beatHit();
-
-		FlxG.log.add('beat');
 	}
 
 	var isEnding:Bool = false;
