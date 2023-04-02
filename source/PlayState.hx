@@ -506,11 +506,10 @@ class PlayState extends MusicBeatState {
 					});
 
 					FlxG.sound.play(Paths.sound('introGo', 'shared'), 0.6);
-				case 4:
 			}
 
 			swagCounter += 1;
-		}, 5);
+		}, 4);
 	}
 
 	var previousFrameTime:Int = 0;
@@ -558,8 +557,6 @@ class PlayState extends MusicBeatState {
 			+ misses, iconRPC);
 		#end
 	}
-
-	var debugNum:Int = 0;
 
 	private function generateSong():Void {
 		Conductor.changeBPM(SONG.bpm);
@@ -1023,8 +1020,7 @@ class PlayState extends MusicBeatState {
 		if (health <= 0) {
 			boyfriend.stunned = true;
 
-			persistentUpdate = false;
-			persistentDraw = false;
+			persistentUpdate = persistentDraw = false;
 			paused = true;
 
 			if (SepVocalsNull)
@@ -1057,8 +1053,7 @@ class PlayState extends MusicBeatState {
 			if ((FlxG.keys.anyJustPressed([resetBind]))) {
 				boyfriend.stunned = true;
 
-				persistentUpdate = false;
-				persistentDraw = false;
+				persistentUpdate = persistentDraw = false;
 				paused = true;
 
 				if (SepVocalsNull)
